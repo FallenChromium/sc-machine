@@ -6,6 +6,8 @@
 
  - **Build system**
     - update macOS install_deps script
+    - Add sanitizers
+
 ## v0.6.0
 
  - **Build system**:
