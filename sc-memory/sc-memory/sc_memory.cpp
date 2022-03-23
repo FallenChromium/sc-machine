@@ -70,7 +70,7 @@ void _logPrintHandler(gchar const * /* log_domain */, GLogLevelFlags log_level,
   };
 }
 
-std::atomic_int gContextCounter = { 0 };
+unsigned int gContextCounter;
 
 } // namespace
 
