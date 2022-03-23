@@ -15,6 +15,9 @@ option (SC_KPM_SCP "Flag to build SCP module" OFF)
 option (SC_BUILD_SCTP "Flag to turn on/off sctp protocol support" ON)
 option (SC_BUILD_TESTS "Flag to build unit tests" OFF)
 
+set(SC_USE_SANITIZER "none" CACHE STRING "Build with specified sanitizer")
+set_property(CACHE SC_USE_SANITIZER PROPERTY STRINGS none address memory)
+
 if (${SC_BUILD_ARM64})
     check_c_compiler_flag("-arch arm64" IS_ARM64_SUPPORTED)
     if (${IS_ARM64_SUPPORTED})
@@ -57,13 +60,30 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcolor-diagnostics -std=c++14")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
+
+if (${SC_USE_SANITIZER} STREQUAL "address")
+    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer")
+elseif (${SC_USE_SANITIZER} STREQUAL "memory")
+    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=memory -fPIE -pie -fno-omit-frame-pointer")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory -fPIE -pie -fno-omit-frame-pointer")
+endif()
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcolor-diagnostics -std=c++14")
+    if (${SC_USE_SANITIZER} STREQUAL "none")
+        set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+    endif()
+    
     if(${SC_AUTO_TEST})
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdeprecated-declarations")
     endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    set(CMAKE_CXX_FLAGS "-std=c++14 -Wall")
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3")        ## Optimize
-    set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-s")  ## Strip binary
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall")
+    if (${SC_USE_SANITIZER} STREQUAL "none")
+        set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")        ## Optimize
+        set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -s")  ## Strip binary
+    endif()
 elseif (NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 endif ()
