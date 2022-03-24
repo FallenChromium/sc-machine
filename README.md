@@ -44,29 +44,5 @@ cd sc-machine/scripts
 ./build_kb.sh
 ```
 
-Build web interface:
-- Install yarn
-```sh
-sudo apt remove cmdtest
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update
-sudo apt install yarn
-```
-- Build
-```sh
-cd sc-machine/web/client
-yarn && yarn run webpack-dev
-```
-
-Run sc-server:
-```sh
-cd sc-machine/scripts
-./run_sc_server.sh
-```
-
-Open URL http://localhost:8090/ in web browser:
-![](https://i.imgur.com/wibISSV.png)
-
 
 *This repository continues the development of [this sc-machine](https://github.com/ostis-dev/sc-machine) from version 0.6.0.*
