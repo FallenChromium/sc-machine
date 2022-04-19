@@ -40,5 +40,9 @@ std::map<std::string, std::string> parse_config(std::string conf)
     {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
+    result["path"].append("kb.bin/"); 
+    for (auto it : result)
+        if (it.second.size()-1 == '/')
+            it.second = it.second.substr(0, it.second.size()-1);
     return result;
 }
