@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
 ## [Unreleased]
+### Added
+- Add scripts to build kb, run sctp-server and run sc-server
+- New flag options for build_kb
+
+### Changed
+- Add default python modules paths to python initialization
+- United config file
 
 ## [0.6.1] - 27.04.2022
 ### Added
@@ -24,8 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved React web interface in a separate [new repository.](https://github.com/ostis-ai/react-sc-web-ui-template)
 - Remove optional search triples support
 
- - **Tools**
-    - Add build_kb
 
 ## v0.6.0
 
