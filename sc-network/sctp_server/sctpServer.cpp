@@ -21,7 +21,6 @@
 
 #include <QNetworkInterface>
 
-
 sctpServer::sctpServer(QObject * parent)
   : QTcpServer(parent)
   , mPort(0)

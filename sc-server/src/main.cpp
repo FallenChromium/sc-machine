@@ -21,19 +21,16 @@ int main(int argc, char * argv[])
 try
 {
   boost::program_options::options_description options_description("Builder usage");
-  options_description.add_options()
-      ("help", "Display this message")
-      ("extensions,e", boost::program_options::value<std::string>(), "Path to directory with sc-memory extensions")
-      ("kb", boost::program_options::value<std::string>(), "Path to kb.bin folder")
-      ("verbose,v", "Flag to don't save sc-memory state on exit")
-      ("clear", "Flag to clear sc-memory on start")
-      ("config,c", boost::program_options::value<std::string>(), "Path to configuration file");
+  options_description.add_options()("help", "Display this message")(
+      "extensions,e", boost::program_options::value<std::string>(), "Path to directory with sc-memory extensions")(
+      "kb", boost::program_options::value<std::string>(), "Path to kb.bin folder")(
+      "verbose,v", "Flag to don't save sc-memory state on exit")("clear", "Flag to clear sc-memory on start")(
+      "config,c", boost::program_options::value<std::string>(), "Path to configuration file");
 
   boost::program_options::variables_map vm;
   boost::program_options::store(
       boost::program_options::command_line_parser(argc, argv).options(options_description).run(), vm);
   boost::program_options::notify(vm);
-
 
   std::string configFile;
   if (vm.count("config"))
@@ -68,7 +65,7 @@ try
     return 0;
   }
 
-  std::atomic_bool isRun = { true };
+  std::atomic_bool isRun = {true};
   utils::ScSignalHandler::Initialize();
   utils::ScSignalHandler::m_onTerminate = [&isRun]() {
     isRun = false;

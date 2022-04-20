@@ -9,36 +9,38 @@
 namespace pod = boost::program_options::detail;
 namespace fs = boost::filesystem;
 
-std::map<std::string, std::string> parse_config(std::string conf) 
+std::map<std::string, std::string> parse_config(std::string conf)
 {
-    fs::path conf_directory(conf);
-    conf_directory = conf_directory.parent_path();
+  fs::path conf_directory(conf);
+  conf_directory = conf_directory.parent_path();
 
-    std::ifstream config(conf);
-    if(!config)
-    {
-        std::cerr << "error" << std::endl;
-        return std::map<std::string, std::string>();
-    }
+  std::ifstream config(conf);
+  if (!config)
+  {
+    std::cerr << "error" << std::endl;
+    return std::map<std::string, std::string>();
+  }
 
-    std::set<std::string> options;
-    options.insert("*");
-    std::map<std::string, std::string> result;
-    
-    try
-    {      
-        for (pod::config_file_iterator i(config, options), e; i != e; ++i)
-        {
-	    if (i->string_key == "Repo.Path") result.insert({"path", (conf_directory/i->value[0]).string()});
-	    if (i->string_key == "Extensions.Directory") result.insert({"ext", (conf_directory/i->value[0]).string()});
-        }
-    }
-    catch(std::exception& e)    
+  std::set<std::string> options;
+  options.insert("*");
+  std::map<std::string, std::string> result;
+
+  try
+  {
+    for (pod::config_file_iterator i(config, options), e; i != e; ++i)
     {
-        std::cerr << "Exception: " << e.what() << std::endl;
+      if (i->string_key == "Repo.Path")
+        result.insert({"path", (conf_directory / i->value[0]).string()});
+      if (i->string_key == "Extensions.Directory")
+        result.insert({"ext", (conf_directory / i->value[0]).string()});
     }
-    for (auto it : result)
-        if (it.second.size()-1 == '/')
-            it.second = it.second.substr(0, it.second.size()-1);
-    return result;
+  }
+  catch (std::exception & e)
+  {
+    std::cerr << "Exception: " << e.what() << std::endl;
+  }
+  for (auto it : result)
+    if (it.second.size() - 1 == '/')
+      it.second = it.second.substr(0, it.second.size() - 1);
+  return result;
 }

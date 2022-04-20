@@ -12,7 +12,6 @@
 #include "../utils/sc_cache.hpp"
 #include "../utils/sc_lock.hpp"
 
-
 namespace bp = boost::python;
 
 extern "C"
