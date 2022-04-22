@@ -24,7 +24,7 @@ def search_knowledge_bases(root_path: str, output_path: str, filename: str):
                 for line in root_file.readlines():
                     line = line.replace('\n', '')
                     # note: with current implementation, line is considered a comment if it's the first character in the line
-                    if line in paths or line.startswith('#'):
+                    if line in paths or line.startswith('#') or re.match(r"^\s*$", line):
                        continue
                     else:
                         absolute_path = abspath(join(root_path, line))
