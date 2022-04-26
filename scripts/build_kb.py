@@ -3,6 +3,7 @@ from os.path import join, abspath, relpath, commonprefix, isdir, exists, dirname
 import os
 import shutil
 import re
+import configparser
 
 paths = set()
 
@@ -54,22 +55,11 @@ def copy_kb(output_path: str):
 
 def parse_config(path: str) -> dict:
     config_dict = {'repo_folder': '', 'output_path': '', 'errors_file_path': ''}
-    with open(path, mode='r') as config:
-        reading_state = False
-        for line in config.readlines():
-            line = line.replace('\n', '')
-            if line == '[Repo]':
-                reading_state = True
-            elif re.search(r'\[.+\]', line):
-                reading_state = False
-            if line.startswith('#'): 
-                continue
-            if line.find("Path = ") != -1 and reading_state:
-                #TODO: name the field in a more declarative way when sctp will be deleted.
-                line = line.replace("Path = ", "")
-                config_dict.update({'output_path': abspath(join(dirname(path), line))})
-            if line.find("Logfile = ") != -1 and reading_state:
-                config_dict.update({'errors_file_path': abspath(join(dirname(path), line.replace("Logfile = ", ""), "prepare.log"))})
+    config = configparser.ConfigParser()
+    config.read(path)
+    config_dict.update({'output_path': abspath(join(dirname(path), config['Repo']['Path']))})
+    config_dict.update({'errors_file_path': abspath(join(dirname(path), config['Repo']['Logfile'], "prepare.log"))})
+
     return config_dict
 
 
