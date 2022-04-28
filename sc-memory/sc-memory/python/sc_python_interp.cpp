@@ -409,7 +409,6 @@ ScPythonMainThread * gMainThread = nullptr;
 
 bool ScPythonInterpreter::Initialize(std::string const & name, std::string const & machine_root_path)
 {
-  // outValues.insert("./sc-kpm/sc-python/services/");
   SC_ASSERT(!ms_isInitialized, ("You can't initialize this class twicely."));
   ms_name.assign(name.begin(), name.end());
 

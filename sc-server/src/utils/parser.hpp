@@ -17,7 +17,7 @@ std::map<std::string, std::string> parse_config(std::string conf)
   std::ifstream config(conf);
   if (!config)
   {
-    std::cerr << "error" << std::endl;
+    std::cerr << "File " << conf << " doesn't exist" << std::endl;
     return std::map<std::string, std::string>();
   }
 

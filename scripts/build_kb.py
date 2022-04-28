@@ -1,7 +1,7 @@
 import argparse
 from os.path import join, abspath, relpath, commonprefix, isdir, exists, dirname
 import os
-import shutil
+from shutil import rmtree, copytree, ignore_patterns
 import re
 import configparser
 
@@ -16,6 +16,13 @@ prepare_scripts = [
     join(kb_scripts_path, 'remove_scsi.py'),
     join(kb_scripts_path, 'gwf_to_scs.py')
 ]
+
+
+REPO_FOLDER = "repo_folder"
+OUTPUT_PATH = "output_path"
+LOGFILE_PATH = "errors_file_path"
+REPO_FILENAME = "repo_file_name"
+CONFIG_PATH = "config_file_path"
 
 
 def search_knowledge_bases(root_path: str, output_path: str, filename: str):
@@ -46,19 +53,18 @@ def copy_kb(output_path: str):
         common_prefix = commonprefix(list(paths))
         for path in paths:
             # removes the common part from paths and copies what's left to prepared_kb
-            # TODO: ignore .git folder inside kb folders 
-            shutil.copytree(path, join(prepared_kb, relpath(
-                path, common_prefix)), dirs_exist_ok=True)
+            copytree(path, join(prepared_kb, relpath(
+                path, common_prefix)), ignore=ignore_patterns(".git"), dirs_exist_ok=True)
     except Exception as e:
         print(e)
 
 
 def parse_config(path: str) -> dict:
-    config_dict = {'repo_folder': '', 'output_path': '', 'errors_file_path': ''}
+    config_dict = {REPO_FOLDER: '', OUTPUT_PATH: '', LOGFILE_PATH: ''}
     config = configparser.ConfigParser()
     config.read(path)
-    config_dict.update({'output_path': abspath(join(dirname(path), config['Repo']['Path']))})
-    config_dict.update({'errors_file_path': abspath(join(dirname(path), config['Repo']['Logfile'], "prepare.log"))})
+    config_dict.update({OUTPUT_PATH: abspath(join(dirname(path), config['Repo']['Path']))})
+    config_dict.update({LOGFILE_PATH: abspath(join(dirname(path), config['Repo']['Logfile'], "prepare.log"))})
 
     return config_dict
 
@@ -80,7 +86,7 @@ def build_kb(bin_folder: str, kb_to_build: str):
 
 
 def main(args: dict):
-    conf = parse_config(args["config_file_path"])
+    conf = parse_config(args[CONFIG_PATH])
 
     #absolutize paths passed as flags
 
@@ -88,46 +94,46 @@ def main(args: dict):
      
     for key in args.keys():
         if args[key] is not None:
-            if key in ["repo_folder", "output_path", "errors_file_path"]: 
+            if key in [REPO_FOLDER, OUTPUT_PATH, LOGFILE_PATH]: 
                 flag = abspath(join(os.getcwd(), args[key]))
             else: flag = args[key] 
             conf[key] = flag
     # output the final configuration for the script, just to be sure about what's going on.
     print("args:", conf)
 
-    #prepared_kb will appear in the same folder as kb.bin
-    kb_to_prepare = join(conf["output_path"], "prepared_kb")
+    # prepared_kb will appear in the same folder as kb.bin
+    kb_to_prepare = join(conf[OUTPUT_PATH], "prepared_kb")
     if isdir(kb_to_prepare):
-        shutil.rmtree(kb_to_prepare)
+        rmtree(kb_to_prepare)
 
-    search_knowledge_bases(conf["repo_folder"], conf["output_path"], conf["repo_file_name"])
+    search_knowledge_bases(conf[REPO_FOLDER], conf[OUTPUT_PATH], conf[REPO_FILENAME])
 
     if not paths:
         print("No KBs were found")
         exit(1)
 
-    copy_kb(conf["output_path"])
-    prepare_kb(kb_to_prepare, conf["errors_file_path"])
-    build_kb(conf["output_path"], kb_to_prepare)
-    shutil.rmtree(kb_to_prepare)
+    copy_kb(conf[OUTPUT_PATH])
+    prepare_kb(kb_to_prepare, conf[LOGFILE_PATH])
+    build_kb(conf[OUTPUT_PATH], kb_to_prepare)
+    # rmtree(kb_to_prepare)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument( dest="repo_folder", type=str,
+    parser.add_argument(dest=REPO_FOLDER, type=str,
                         help="The entrypoint folder, should contain a repo file, see -f option to change the name")
 
-    parser.add_argument('-o', '--output', dest="output_path",
+    parser.add_argument('-o', '--output', dest=OUTPUT_PATH,
                         help="Destination path - path where KB binaries will be stored. Taken from the config file unless overwritten by this flag.")
 
-    parser.add_argument('-l', '--logfile', dest="errors_file_path",
+    parser.add_argument('-l', '--logfile', dest=LOGFILE_PATH,
                         help="Errors file path - in case of unsuccessful preparation, log will appear at this location. Taken from the config file unless overwritten by this flag.")
 
-    parser.add_argument('-f', '--filename', dest="repo_file_name",
+    parser.add_argument('-f', '--filename', dest=REPO_FILENAME,
                         help="Repo file name - a filename for repo file that will be used in all subsequent KBs. Default: repo.path", default="repo.path")
 
-    parser.add_argument('-c', '--config', dest='config_file_path',
+    parser.add_argument('-c', '--config', dest=CONFIG_PATH,
                         help="Config file path - path to the sc-machine config file (Note: config file has lower priority than flags!)")
 
     args = parser.parse_args()
