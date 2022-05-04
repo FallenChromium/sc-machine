@@ -31,11 +31,12 @@ def search_knowledge_bases(root_path: str, output_path: str, filename: str):
             with open(join(root_path, filename), 'r') as root_file:
                 for line in root_file.readlines():
                     line = line.replace('\n', '')
+                    absolute_path = abspath(join(root_path, line))
                     # note: with current implementation, line is considered a comment if it's the first character in the line
-                    if line in paths or line.startswith('#') or re.match(r"^\s*$", line):
+                    #ignore paths we've already checked, comments and empty lines
+                    if absolute_path in paths or line.startswith('#') or re.match(r"^\s*$", line):
                        continue
                     else:
-                        absolute_path = abspath(join(root_path, line))
                         paths.add(absolute_path)
                         search_knowledge_bases(
                         absolute_path, output_path, filename)
