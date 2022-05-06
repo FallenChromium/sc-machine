@@ -9,16 +9,13 @@
 #include "sctpStatistic.h"
 #include "sctpEventManager.h"
 
-#include <QSettings>
+#include "sc-memory/sc_memory.hpp"
+
+#include "utils/parser.hpp"
+
 #include <QDebug>
 #include <QThreadPool>
 #include <QTimer>
-
-#include <iostream>
-#include "sc-memory/sc_memory.hpp"
-#include "utils/parser.hpp"
-#include <map>
-
 #include <QNetworkInterface>
 
 sctpServer::sctpServer(QObject * parent)

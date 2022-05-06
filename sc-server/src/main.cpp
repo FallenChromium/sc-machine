@@ -6,16 +6,15 @@
 
 #include <boost/program_options.hpp>
 
-#include <iostream>
-
 #include <sc-memory/sc_debug.hpp>
 #include <sc-memory/sc_memory.hpp>
 #include <sc-memory/utils/sc_signal_handler.hpp>
+
 #include "utils/parser.hpp"
 
 #include <atomic>
+#include <iostream>
 #include <thread>
-#include <map>
 
 int main(int argc, char * argv[])
 try
