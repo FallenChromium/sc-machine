@@ -1,0 +1,1275 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.0">
+    
+    
+      
+        <title>Sctp-protocol - SC-machine</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fd896c8a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../_assets/main.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sctp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SC-machine" class="md-header__button md-logo" aria-label="SC-machine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SC-machine
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sctp-protocol
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SC-machine" class="md-nav__button md-logo" aria-label="SC-machine" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    SC-machine
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Build
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Build" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Build
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../build/linux-build/" class="md-nav__link">
+        Build on Linux
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../build/windows-build/" class="md-nav__link">
+        Build on Windows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../build/osx-build/" class="md-nav__link">
+        Build on OSX
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../build/cmake-flags/" class="md-nav__link">
+        CMake Flags
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Development
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Development" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Development
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/git-workflow/" class="md-nav__link">
+        Git-workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/pr/" class="md-nav__link">
+        Pull requets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/codestyle/" class="md-nav__link">
+        Codestyle
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Common
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Common" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Common
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp/el_types/" class="md-nav__link">
+        Element types
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/config/" class="md-nav__link">
+        Configuration files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Sctp-protocol
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/scs/" class="md-nav__link">
+        SCs language
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp/cpp-meta/" class="md-nav__link">
+        Meta programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp/kpm/" class="md-nav__link">
+        Agents
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp/templates/" class="md-nav__link">
+        Template
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp/common/" class="md-nav__link">
+        Common
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_5">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Python" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/python/" class="md-nav__link">
+        Common
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/library/" class="md-nav__link">
+        Library
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/cpp_wrap/" class="md-nav__link">
+        Wrapped classes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Http
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Http" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Http
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../http/" class="md-nav__link">
+        Common
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../http/websocket/" class="md-nav__link">
+        WebSocket
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Tools
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tools" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Tools
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/kb_builder/" class="md-nav__link">
+        Builder
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thirdparty/" class="md-nav__link">
+        Thirdparty
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="sctp">Протокол SCTP</h1>
+<p><strong>sctp-команда</strong></p>
+<p>SCTP-команда состоит из двух частей:
+* <strong>заголовок команды</strong> - часть команды, в которой указан её тип и некоторая дополнительная информация о ней. Заголовок команды имеет фиксированный размер.
+* <strong>аргументы</strong> - часть команды, которая содержит её аргументы. Размер аргументов может быть разным и зависит лишь от типа команды.</p>
+<p>Таким образом размер команды зависит от её типа.</p>
+<p><strong> Заголовок sctp-команды </strong>
+Заголовок sctp-команды имеет следующую структуру:</p>
+<table>
+ <tr>
+  <th>Поле</th>
+  <th>Размер</th>
+  <th>Примечание</th>
+ </tr>
+
+ <tr>
+  <td>code</td>
+  <td>1 байт</td>
+  <td>Используется для указания типа команды (описание команд приведено дальше)</td>
+ </tr>
+
+ <tr>
+  <td>flags</td>
+  <td>1 байт</td>
+  <td>Используется для передачи дополнительных флагов команды (описаны далее)</td>
+ </tr>
+
+ <tr>
+  <td>id</td>
+  <td>4 байта</td>
+  <td>Уникальный идентификатор команды (должен быть уникальным в рамках клиента, так как по нему клиент устанавливает соотвествие между результатом и конкретной командой)</td>
+ </tr>
+
+ <tr>
+  <td>size</td>
+  <td>4 байта</td>
+  <td>Размер поля с аргументами (в байтах)</td>
+ </tr>
+</table>
+
+<p>После выполнения каждой sctp-команды возвращается результат, который привязан к id команды. Так как команда выполняется асинхронно, то результат может может быть возвращен в любой момент. Схема выполнения команды выглядит следующим образом:</p>
+<p><img alt="Структура sc-машины" src="http://github.com/deniskoronchik/sc-machine/wiki../../images/sctp/command_cycle.png" /></p>
+<p><strong>Важно</strong>: протокол является двусторонним. Другими словами часть команд может быть отправлена сервером клиенту, в тот момент, когда клиент ожидает ответ на запрос. Сервер гарантирует целостность сообщений, но не гарантирует порядок их прихода.</p>
+<p><strong>sctp-результат</strong></p>
+<p>SCTP-результат состоит из двух частей:
+* <strong>заголовок результата</strong> - часть результата, в которой указан его тип и некоторая дополнительная информация о нем. Заголовок результата имеет фиксированный размер.
+* <strong>значения</strong> - часть результата, которая содержит возвращаемые значения. Размер этого поля может быть разным и зависит лишь от типа результата.</p>
+<p>Таким образом размер реузльтата зависит от его типа. Тип результата всегда совпадает с типом команды которой соотвествует этот результат.</p>
+<p>Заголовок sctp-результата имеет следующую структуру:</p>
+<table>
+ <tr>
+  <th>Поле</th>
+  <th>Размер</th>
+  <th>Примечание</th>
+ </tr>
+
+ <tr>
+  <td>code</td>
+  <td>1 байт</td>
+  <td>Тип команды к которой возвращается результат</td>
+ </tr>
+
+ <tr>
+  <td>id</td>
+  <td>4 байта</td>
+  <td>Уникальный идентификатор команды которой соответствует этот результат</td>
+ </tr>
+
+ <tr>
+  <td>return</td>
+  <td>1 байт</td>
+  <td>Код возврата - один из базовых кодов возврата, который говорит об успешности выполнения команды или в противном случае содержит код ошибки</td>
+ </tr>
+
+ <tr>
+  <td>size</td>
+  <td>4 байта</td>
+  <td>Размер поля с результатами (в байтах)</td>
+ </tr>
+
+</table>
+
+<p>Таблица кодов возврата:</p>
+<table>
+ <tr>
+  <th>Код</th>
+  <th>Описание</th>
+ </tr>
+
+ <tr>
+  <td>0x00</td>
+  <td>Успешное выполнение команды</td>
+ </tr>
+
+ <tr>
+  <td>0x01</td>
+  <td>Безуспешное выполнение команды</td>
+ </tr>
+
+ <tr>
+  <td>0x02</td>
+  <td>Указанный sc-элемент не найден (не верный sc-адрес)</td>
+ </tr>
+
+
+ <tr>
+  <td>0x03</td>
+  <td>Не достаточно прав доступа для выполнения команды</td>
+ </tr>
+
+</table>
+
+<p><b>Важно: </b>если sctp-команда выполнена с ошибкой то sctp-результат состоит лишь из заголовка</p>
+<p>Таблица базовых шаблонов поиска:</p>
+<table>
+ <tr>
+  <th>Код</th>
+  <th>Шаблон</th>
+ </tr>
+
+ <tr>
+  <td>0</td>
+  <td>3f_a_a</td>
+ </tr>
+
+ <tr>
+  <td>1</td>
+  <td>3a_a_f</td>
+ <tr>
+
+ <tr>
+  <td>2</td>
+  <td>3f_a_f</td>
+ <tr>
+
+ <tr>
+  <td>3</td>
+  <td>5f_a_a_a_f</td>
+ <tr>
+
+ <tr>
+  <td>4</td>
+  <td>5_a_a_f_a_f</td>
+ <tr>
+
+ <tr>
+  <td>5</td>
+  <td>5_f_a_f_a_f</td>
+ <tr>
+
+ <tr>
+  <td>6</td>
+  <td>5_f_a_f_a_a</td>
+ <tr>
+
+ <tr>
+  <td>7</td>
+  <td>5_f_a_a_a_a</td>
+ <tr>
+
+ <tr>
+  <td>8</td>
+  <td>5_a_a_f_a_a</td>
+ <tr>
+
+</table>
+
+<p>Таблица кодов событий:</p>
+<table>
+ <tr>
+  <th>Код</th>
+  <th>Событие</th>
+ </tr>
+
+ <tr>
+  <td>0</td>
+  <td>Добавление выходящей дуги (ребра)</td>
+ </tr>
+
+ <tr>
+  <td>1</td>
+  <td>Добавление входящей дуги (ребра)</td>
+ </tr>
+
+ <tr>
+  <td>2</td>
+  <td>Удаление выходящей дуги (ребра)</td>
+ </tr>
+
+ <tr>
+  <td>3</td>
+  <td>Удаление входящей дуги (ребра)</td>
+ </tr>
+
+ <tr>
+  <td>4</td>
+  <td>Удаление sc-элемента</td>
+ </tr>
+
+ <tr>
+  <td>5</td>
+  <td>Изменение содержимого sc-ссылки</td>
+ </tr>
+
+</table>
+
+<p>Далее перечислены коды всех команд с описанием их аргументов и результатов:
+<br/><br/>
+<b>Код:</b> 0x01 <br/>
+<b>Команда:</b> Проверка существования элемента с указанным sc-адресом <br/>
+<b>Аргументы:</b> <i>4 байта</i> - sc-адрес проверяемого sc-элемента <br/>
+<b>Результат:</b> Результат выполнения лежит в возвращаемом коде. Если там код успешного выполнения, то элемент с указанным sc-адресом существует, иначе возвращается код ошибки.<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x02<br/>
+<b>Команда:</b> Получение типа sc-элемента по sc-адресу<br/>
+<b>Аргументы:</b> <i>4 байта</i> - sc-адрес элемента для получения типа<br/>
+<b>Результат:</b> Если выполнение команды успешно, то в качестве результата возвращаются 2 байта обозначающих тип sc-элемента. Иначе размер поля с результатами равен нулю (результатов нет)<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x03<br/>
+<b>Команда:</b> Удаление sc-элемента с указанным sc-адресом<br/>
+<b>Аргументы:</b> <i>4 байта</i> - sc-адрес удаляемого sc-элемента<br/>
+<b>Результат:</b> Команда возвращает лишь код удачного выполнения, если элемент удален успешно, иначе возвращается код ошибки.<br/></p>
+<hr/>
+<p><b>Код:</b> 0x04<br/>
+<b>Команда:</b> Создание нового sc-узла указанного типа<br/>
+<b>Аргументы:</b> <i>2 байта</i> - тип создаваемого sc-узла<br/>
+<b>Результат:</b> Если выполнение команды успешно, то в качестве результата возвращаются <i>4 байта</i> обозначающих адрес созданного sc-узла. Иначе размер поля с результатами равен нулю (результатов нет)<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x05<br/>
+<b>Команда:</b> Создание новой sc-ссылки<br/>
+<b>Аргументы:</b> нет<br/>
+<b>Результат:</b> Если выполнение команды успешно, то в качестве результата возвращаются <i>4 байта</i> обозначающих адрес созданной sc-ссылки. Иначе размер поля с результатами равен нулю (результатов нет)<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x06<br/>
+<b>Команда:</b> Создание новой sc-дуги указанного типа, с указнным начальным и конечным элементами<br/>
+<b>Аргументы:</b><br/>
+   <i>2 байта</i> - тип создаваемой sc-дуги<br/>
+   <i>4 байта</i> - sc-адрес начального элемента sc-дуги<br/>
+   <i>4 байта</i> - sc-адрес конечного элемента sc-дуги
+<br/>
+<b>Результат:</b> Если выполнение команды успешно, то в качестве результата возвращаются <i>4 байта</i> обозначающих адрес созданной sc-дуги. Иначе размер поля с результатами равен нулю (результатов нет)<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x07<br/>
+<b>Команда:</b> Получение начального и конечного элемента sc-дуги<br/>
+<b>Аргументы:</b> <i>4 байта</i> - sc-адрес дуги у которой необходимо получить начальный и конечный элемент<br/>
+<b>Результат:</b> </br>
+<i>4 байта</i> - sc-адрес начального элемента дуги <br/>
+<i>4 байта</i> - sc-адрес конечного элементе дуги <br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x08<br/>
+<b>Команда:</b> <br/>
+<b>Аргументы:</b><br/>
+<b>Результат:</b><br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x09<br/>
+<b>Команда:</b> Получение содержимого sc-ссылки<br/>
+<b>Аргументы:</b> <i>4 байта</i> - sc-адрес ссылки для получения содержимого<br/>
+<b>Результат:</b> Если выполнение команды успешно, то в качестве размера поля с результатми возвращается размер содержимого, а качестве данных выступает само модержимое. Иначе размер поля с результатами равен нулю (результатов нет)<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x0a<br/>
+<b>Команда:</b> Поиск всех sc-ссылок с указанным содержимым<br/>
+<b>Аргументы:</b> <br/>
+   <i>4 байта</i> - N (размер содержимого в байтах) <br/>
+   <i>N байт</i> - содержимое для поиска <br/>
+<b>Результат:</b> Если выполнение команды успешно, то в качестве результата возвращается: <br/>
+   <i> N </i>- количество найденных sc-ссылок (4 байта) <br/>
+   <i> N sc-адресов </i> - найденные sc-ссылки. <br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x0b<br/>
+<b>Команда:</b> Установка содержимого sc-ссылки<br/>
+<b>Аргументы:</b> <br/>
+   <i>4 байт</i> - sc-адрес ссылки <br/>
+   <i>4 байт</i> - размер содержимого в байтах <br/>
+   <i>N байт</i> - данные устанавливаемого содержимого <br/>
+<b>Результат:</b> Результат выполнения лежит в возвращаемом коде. Если там код успешного выполнения, то содержимое установлено, иначе возвращается код ошибки. <br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x0c<br/>
+<b>Команда:</b> Найти конструкции по указанному 3-х или 5-ти элементному шаблону<br/>
+<b>Аргументы:</b> 
+   <i>1 байт</i> - тип шаблонной конструкции для поиска <br/>
+   <i>N байт</i> - аргументы для постановки в шаблон для поиска. Зависят от 
+    шаблона поиска. К примеру, для шаблона 3f_a_a они будут следующие: 4 байта - адрес начального sc-элемента; 2 байта тип искомой дуги; 2 байта тип конечного sc-элемента. Другими словами каждому <i>f</i> в шаблоне поиска соответсвует sc-адрес (4 байта), а каждому <i>a</i> тип sc-элемента (2 байта) <br/>
+<b>Результат:</b> Если выполнение команды успешно, то в качестве результата возвращается <br/>
+   <i> 4 байта </i> - количество найденных, по указанному шаблону, конструкций <br/>
+   <i> N байт </i>, в которых хранятся найденные коснтрукции. К примеру, если найдено <i>K</i> конструкций соотвествующие указанному шаблону, то <i>N = T * K * 4 байт</i>, где T - количество аргументов в искомом шаблоне, для 3-х элементных конструкций оно равно 3, для 5-ти элементных - 5. В результатах лежат последовательно все найденные конструкции, они задаются sc-адресами найденых sc-элементов.<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x0d<br/>
+<b>Команда:</b> Итерирование сложных конструкций (<b>улучшить описание</b>)<br/>
+<b>Аргументы:</b> <br/>
+   <i> 1 байт </i> - количество итераторов <b>(max 50)</b><br/>
+   <i> N байт </i> - данные итераторов <br/>
+   Каждый итератор описывается следующей структурой: <br/>
+   <i> 1 байт </i> - тип итератора <br/>
+   <i> nF байт </i> - правила подстановки (<b><i>Для первого итератора этих правил нет</i></b>). Правило подстановки это номер адреса в результате, который необходимо подставить в качестве аргумента итератора (255 - отсутсвующая подстановка). Результаты последовательного выполнения итераторов попадают в общий массив. Другими словами если у нас есть два итератора 3-х и 5-ти элементных конструкций, то номер адреса 4 даст первый элемент 5-ти элементной конструкции. nF - это количество известных аргументов итератора (fixed), nA - количество неизвестных аргументов итератора (assign). Итераторы выполняются последовательно, поэтому номер подстановки должен быть меньше количества аргументов итераторов до этого. <br/>
+   <i> (nF - k) * 4 + nA * 2 байт </i> - все подстановки, пропускаются, их нет необходимости указывать (k - количество подстановок) <br/>
+<b>Результат:</b> <br/>
+   <i> 4 байта </i> - количество результатов (<b>rCount</b>)<br/>
+   <i> N байт </i> - результаты итерирования. N = 4 * rCount * k, где k - сумма аргументов всех итераторов в запросе (для примера с двумя итераторами 3-х и 5-ти элементных конструкций, k = 8) <br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x0e<br/>
+<b>Команда:</b> Создание подписки на событие<br/>
+<b>Аргументы:</b> <br/> 
+   <i>1 байт</i> - тип события <br/>
+   <i>4 байта</i> - адрес sc-элемента для подписки на событие<br/>
+<b>Результат:</b> В случае, если подписка на событие произведена успешно, то возвращается id подписки состоящий из <i>4 байт</i>. Если же подписаться на событие не удалось, то возвращается лишь заголовок ответа, который содержит код ошибки.<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x0f<br/>
+<b>Команда:</b> Удаление подписки на событие<br/>
+<b>Аргументы:</b> <i>4 байта</i> - id подписки, которую необходимо удалить<br/>
+<b>Результат:</b> В результате неудачнго выполнения запроса возвращается только заголовок с кодом ошибки. Если же запрос обработан без ошибок, то в заголовке будет код удачного выполнения а в результате будет <i>4 байта</i> - id подписки, которая удалена<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x10<br/>
+<b>Команда:</b> Запрос произошедших событий<br/>
+<b>Аргументы:</b> нет<br/>
+<b>Результат:</b> Если запрос обработан успешно, то в результате содержится количество произошедших событий <i>4 байта</i> и описание всех этих событий. Каждое из которых описывается следующей последовательностью байт: <br/>
+   <i>4 байта</i> - id события <br/>
+   <i>4 байта</i> - адрес sc-элемента событие с которым произошло <br/>
+   <i>4 байта</i> - аргумент события (адрес sc-дуги, которая была удалена/создана (для событий генерации/удаления дуги))<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0x11<br/>
+<b>Команда:</b> Генерация сложных конструкций (<b>улучшить описание</b>). Параметры задаются также как и в итерировании сложных конструкций, только вместо поиска осуществляется их генерация. <b>Важно! Команда не проверяет наличие уже существующих конструкций по указанным шаблонам!</b><br/>
+<b>Аргументы:</b> <br/>
+   <i> 1 байт </i> - количество итераторов/шаблонов <b>(max &lt;= 50)</b><br/>
+   <i> N байт </i> - данные итераторов/шаблонов <br/>
+   Каждый итератор описывается следующей структурой: <br/>
+   <i> 1 байт </i> - тип итератора <br/>
+   <i> nF байт </i> - правила подстановки (<b><i>Для первого итератора этих правил нет</i></b>). Правило подстановки это номер адреса в результате, который необходимо подставить в качестве аргумента итератора (255 - отсутсвующая подстановка). Результаты последовательного выполнения итераторов попадают в общий массив. Другими словами если у нас есть два итератора 3-х и 5-ти элементных конструкций, то номер адреса 4 даст первый элемент 5-ти элементной конструкции. nF - это количество известных аргументов итератора (fixed), nA - количество неизвестных аргументов итератора (assign). Итераторы выполняются последовательно, поэтому номер подстановки должен быть меньше количества аргументов итераторов до этого. <br/>
+   <i> (nF - k) * 4 + nA * 2 байт </i> - все подстановки, пропускаются, их нет необходимости указывать (k - количество подстановок) <br/>
+<b>Результат:</b> <br/>
+   <i> N байт </i> - результаты генерации N = 4 * k, где k - сумма аргументов всех итераторов в запросе (для примера с двумя итераторами 3-х и 5-ти элементных конструкций, k = 8) <br/></p>
+<hr/>
+
+<p><b>Код:</b> 0xa0<br/>
+<b>Команда:</b> Поиск sc-элемента по его системному идентификатору<br/>
+<b>Аргументы:</b> <br/>
+   <i>4 байта</i> - N (размер идентификатора в байтах) <br/>
+   <i>N байт</i> - данные идентификатора <br/>
+<b>Результат:</b> Если выполнение команды успешно, то в качестве результата возвращаются <i>4 байта</i> обозначающих адрес найденого sc-эелемента. Иначе размер поля с результатами равен нулю (результатов нет)<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0xa1<br/>
+<b>Команда:</b> Установка системного идентификатора sc-элемента<br/>
+<b>Аргументы:</b> <br/>
+   <i>4 байта</i> - адрес sc-элемента <br/>
+   <i>4 байта</i> - N (размер идентификатора в байтах) <br/>
+   <i>N байт</i> - данные идентификатора <br/>
+<b>Результат:</b> <br/></p>
+<hr/>
+
+<p><b>Код:</b> 0xa2<br/>
+<b>Команда:</b> Получение статистики с сервера, в ременных границах. Время используется в формате http://en.wikipedia.org/wiki/Unix_time<br/>
+<b>Аргументы:</b> <br/>
+   <i>8 байт</i> - Нижняя временная граница <br/>
+   <i>8 байт</i> - Верхняя временная граница <br/>
+<b>Результат:</b> Если выполнение команды успешно, то в качестве результата возвращаются <i>4 байта</i> обозначающих количество временных отметок результаты которых возвращаются. Каждая такая временная отметка состоит из следуюзик полей: <br/>
+   <i>8 байт</i> - Время сбора статистики<br/>
+   <i>8 байт</i> - Общее количество sc-узлов, которые есть в sc-памяти<br/>
+   <i>8 байт</i> - Общее количество sc-дуг, которые есть в sc-памяти<br/>
+   <i>8 байт</i> - Общее количество sc-ссылок, которые есть в sc-памяти<br/>
+   <i>8 байт</i> - Количество пустых ячеек в sc-памяти<br/>
+   <i>8 байт</i> - Общее количество подключений клиентов к sctp серверу (не активных, а общее число включая и завершенные)<br/>
+   <i>8 байт</i> - Количество обработанных sctp команд (включая обработанные с ошибками)<br/>
+   <i>8 байт</i> - Количество обработанных с ошибками sctp команд<br/>
+   <i>1 байт</i> - Флаг начального сбора статистики. Другими словами, если это значание равно 1, то статистика была собрана при запуске sctp сервера. Если значание равно 0, то статистика собрана уже во время работы сервера<br/></p>
+<hr/>
+
+<p><b>Код:</b> 0xa3<br/>
+<b>Команда:</b> Получение версии протокола<br/>
+<b>Аргументы:</b> нет<br/>
+<b>Результат:</b> Если команда выполнена успешно, то в качестве результата возвращается <i>4 байта</i>, которые обозначают версию используемого сервером sctp протокола. (способ кодирования версии необходимо уточнить)<br/></p>
+<hr/>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../other/config/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configuration files" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Configuration files
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../other/scs/" class="md-footer__link md-footer__link--next" aria-label="Next: SCs language" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              SCs language
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.0f659f14.min.js"></script>
+      
+        <script src="../../_assets/scg.min.js"></script>
+      
+        <script src="../../_assets/main.js"></script>
+      
+    
+  </body>
+</html>
