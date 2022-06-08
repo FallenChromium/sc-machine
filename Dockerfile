@@ -15,10 +15,10 @@ RUN python3 -m pip install --no-cache-dir termcolor tornado
 
 #Derived from dev image and not not "base" image because any change in base would cache bust the dev/build environment
 FROM mcr.microsoft.com/vscode/devcontainers/cpp:0-${VARIANT} as dev-env
-#Install build-time deps
-RUN apt update && apt -y install --no-install-recommends qtbase5-dev git librocksdb-dev libglib2.0-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev make cmake antlr gcc g++ llvm libcurl4-openssl-dev libclang-dev libboost-python-dev python3-dev python3-pip curl python3-rocksdb redis-server 
+#install build time dependencies before copying the sources (for caching)
+COPY ./scripts/install_deps_ubuntu.sh /tmp/install_deps_ubuntu.sh
+RUN /tmp/install_deps_ubuntu.sh
 RUN python3 -m pip install --no-cache-dir termcolor tornado 
-
 
 FROM dev-env as build-env
 ## copy sources
@@ -32,7 +32,7 @@ RUN ./make_all.sh
 #Gathering all artifacts together
 FROM base AS final
 
-COPY --from=buildenv /ostis /ostis
+COPY --from=build-env /ostis /ostis
 
 WORKDIR /ostis/sc-machine/scripts
 
